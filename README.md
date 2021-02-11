@@ -1,15 +1,15 @@
-# Freedom of the Press vs. COVID Response
+# Freedom of the Expression vs. COVID Response
 
 ## Introduction
 
-This project focuses on how freedom of the press in a particular country compares to the *strictness* of the country's COVID response.
+This project focuses on how freedom of the expression in a particular country compares to the *strictness* of the country's COVID response.
 
 (*Strictness* is not the same as *effectiveness*, this project focuses **only** on *strictness*)
 
 ## Data
 
 - `data/human-freedom-index-2019.csv`
-    - This project measures freedom of the press using data from the Human Freedom Index 2019 (https://www.cato.org/human-freedom-index/2019).
+    - This project measures freedom of the expression using data from the Human Freedom Index 2019 (https://www.cato.org/human-freedom-index/2019).
         - The report from *2019* is used, but it only contains data up to 2017. This is because (as explained on the HFI website), 2017 is the most recent year that sufficient data was available to create the report (the 2018 report included data up to 2016, the 2017 report included data up to 2015, and so on).
         - Only data from 2017 (the most recent) is used.
 - `data/covid-stringency-index.csv`
@@ -26,5 +26,5 @@ This project focuses on how freedom of the press in a particular country compare
 
 ## Methods
 
-- This project uses k-means clustering to cluster the countries into groups based on their freedom of press levels.
+- This project uses k-means clustering to cluster the countries into groups based on their freedom of expression levels.
 - The COVID response stringency levels are then compared between these clusters.
