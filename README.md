@@ -25,6 +25,6 @@ This project focuses on how freedom of the press in a particular country compare
 
 - Create the virtual environment and install the required packages (python 3.6+).
     ```
-python -m venv venv
-python -m pip install -r requirements.txt
+    python -m venv venv
+    python -m pip install -r requirements.txt
     ```
