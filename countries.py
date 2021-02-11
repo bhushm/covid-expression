@@ -43,4 +43,48 @@ def find_shared_countries():
 
 
 def cluster_countries():
-    """Cluster the countries using k-means by freedom of expression."
+    """Cluster the countries using k-means by freedom of expression."""
+
+    # All of the countries to be used
+    countries = find_shared_countries()
+
+    # The expression data for the countries
+    expression_data = {}
+
+    with open(FREEDOM_FILENAME) as freedom_file:
+
+        # The names of the expression column names in the CSV file
+        expression_column_names = [
+            "pf_expression_killed",
+            "pf_expression_jailed",
+            "pf_expression_influence",
+            "pf_expression_control",
+            "pf_expression_cable",
+            "pf_expression_newspapers",
+            "pf_expression_internet",
+        ]
+
+        # Read the human freedoms file
+        freedom_reader = csv.DictReader(freedom_file)
+
+        for row in freedom_reader:
+
+            # Check if the row has the right year and country values
+            if row["year"] == "2017" and row["ISO_code"] in countries:
+
+                # The country ISO code
+                country = row["ISO_code"]
+
+                # The expression data for the country
+                expression_data[country] = {}
+
+                # Add the data for each desired column
+                for column_name in expression_column_names:
+
+                    # Get the column value (and return None if it is not a number)
+                    try:
+                        value = float(row[column_name])
+                    except ValueError:
+                        value = None
+
+                    expression_data[country][column_name] = value
