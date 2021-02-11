@@ -1,7 +1,7 @@
 import csv
 
-FREEDOM_FILENAME = "human-freedom-index-2019.csv"
-RESPONSE_FILENAME = "covid-stringency-index.csv"
+FREEDOM_FILENAME = "data/human-freedom-index-2019.csv"
+RESPONSE_FILENAME = "data/covid-stringency-index.csv"
 
 
 def shared_countries():
@@ -39,6 +39,3 @@ def shared_countries():
 
     # Return all of the shared country codes
     return sorted(freedom_countries & response_countries)
-
-
-print(shared_countries())
