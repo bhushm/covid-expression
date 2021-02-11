@@ -21,8 +21,8 @@ This project focuses on how freedom of the expression in a particular country co
 - Create the virtual environment and install the required packages (python 3.6+).
     ```
     python -m venv venv
-    python -m pip install -r requirements.txt
     venv\Scripts\activate
+    python -m pip install -r requirements.txt
     ```
 
 ## Methods
