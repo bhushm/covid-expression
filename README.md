@@ -16,11 +16,6 @@ This project focuses on how freedom of the press in a particular country compare
     - This project measures stringency of COVID response using data from Our World In Data (https://ourworldindata.org/covid-government-stringency-index)
         - Although this data includes data up to the current day (in 2021), only data for *2020* is used.
 
-## Methods
-
-- This project uses k-means clustering to cluster the countries into groups based on their freedom of press levels.
-- The COVID response stringency levels are then compared between these clusters.
-
 ## Development
 
 - Create the virtual environment and install the required packages (python 3.6+).
@@ -28,3 +23,8 @@ This project focuses on how freedom of the press in a particular country compare
     python -m venv venv
     python -m pip install -r requirements.txt
     ```
+
+## Methods
+
+- This project uses k-means clustering to cluster the countries into groups based on their freedom of press levels.
+- The COVID response stringency levels are then compared between these clusters.
