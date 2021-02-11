@@ -22,6 +22,7 @@ This project focuses on how freedom of the expression in a particular country co
     ```
     python -m venv venv
     python -m pip install -r requirements.txt
+    venv\Scripts\activate
     ```
 
 ## Methods
