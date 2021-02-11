@@ -27,5 +27,3 @@ This project focuses on how freedom of the expression in a particular country co
 
 ## Methods
 
-- This project uses k-means clustering to cluster the countries into groups based on their freedom of expression levels.
-- The COVID response stringency levels are then compared between these clusters.
