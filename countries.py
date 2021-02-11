@@ -4,7 +4,7 @@ FREEDOM_FILENAME = "data/human-freedom-index-2019.csv"
 RESPONSE_FILENAME = "data/covid-stringency-index.csv"
 
 
-def shared_countries():
+def find_shared_countries():
     """Find all countries that are shared between the datasets (by ISO Code)."""
 
     # The countries (by ISO Code) that are in the freedom dataset.
@@ -14,16 +14,20 @@ def shared_countries():
     response_countries = []
 
     with open(FREEDOM_FILENAME) as freedom_file:
+
+        # Read the human freedoms file
         freedom_reader = csv.DictReader(freedom_file)
 
         for row in freedom_reader:
-            if row['year'] == '2017': # Only use the rows from 2017.
+            if row['year'] == '2017': # Only use the rows from 2017
                 iso_code = row["ISO_code"] # The ISO Code of the country
 
                 if not iso_code in freedom_countries:
                     freedom_countries.append(iso_code) # Add the ISO Code to the list
 
     with open(RESPONSE_FILENAME) as response_file:
+
+        # Read the COVID response file
         response_reader = csv.DictReader(response_file)
 
         for row in response_reader:
@@ -36,3 +40,7 @@ def shared_countries():
 
     # Return all of the shared country codes
     return sorted(freedom_countries & response_countries)
+
+
+def cluster_countries():
+    """Cluster the countries using k-means by freedom of expression."
