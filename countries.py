@@ -7,9 +7,6 @@ RESPONSE_FILENAME = "data/covid-stringency-index.csv"
 def shared_countries():
     """Find all countries that are shared between the datasets (by ISO Code)."""
 
-    # The countries (by ISO Code) that are shared between the datasets.
-    shared_countries = []
-
     # The countries (by ISO Code) that are in the freedom dataset.
     freedom_countries = []
 
