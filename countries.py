@@ -45,38 +45,38 @@ def find_shared_countries():
     return sorted(freedom_countries & response_countries)
 
 
-def compare_response_freedom():
-    """Simple example function that compares the COVID response and freedom of expression of the countries."""
-
-    countries = find_shared_countries()
-
-    countries_data = {}
-    for country in countries:
-        countries_data[country] = {}
-
-    with open(FREEDOM_FILENAME) as freedom_file:
-        freedom_reader = csv.DictReader(freedom_file)
-
-        for row in freedom_reader:
-            if row['year'] == '2017':
-                iso_code = row["ISO_code"]
-
-                if iso_code in countries:
-                    countries_data[iso_code]['freedom'] = row['pf_expression']
-
-    with open(RESPONSE_FILENAME) as response_file:
-        response_reader = csv.DictReader(response_file)
-
-        for row in response_reader:
-            iso_code = row["Code"]
-
-            if iso_code in countries:
-                countries_data[iso_code]['response'] = row['stringency_index']
-
-    raw_countries_data = [(float(pair['freedom']), float(pair['response'])) for pair in list(countries_data.values())]
-
-    plt.scatter(*zip(*raw_countries_data))
-
-    plt.savefig('results/compare.png')
-
-compare_response_freedom()
+# def compare_response_freedom():
+#     """Simple example function that compares the COVID response and freedom of expression of the countries."""
+#
+#     countries = find_shared_countries()
+#
+#     countries_data = {}
+#     for country in countries:
+#         countries_data[country] = {}
+#
+#     with open(FREEDOM_FILENAME) as freedom_file:
+#         freedom_reader = csv.DictReader(freedom_file)
+#
+#         for row in freedom_reader:
+#             if row['year'] == '2017':
+#                 iso_code = row["ISO_code"]
+#
+#                 if iso_code in countries:
+#                     countries_data[iso_code]['freedom'] = row['pf_expression']
+#
+#     with open(RESPONSE_FILENAME) as response_file:
+#         response_reader = csv.DictReader(response_file)
+#
+#         for row in response_reader:
+#             iso_code = row["Code"]
+#
+#             if iso_code in countries:
+#                 countries_data[iso_code]['response'] = row['stringency_index']
+#
+#     raw_countries_data = [(float(pair['freedom']), float(pair['response'])) for pair in list(countries_data.values())]
+#
+#     plt.scatter(*zip(*raw_countries_data))
+#
+#     plt.savefig('results/compare.png')
+#
+# compare_response_freedom()
