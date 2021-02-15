@@ -5,7 +5,7 @@ FREEDOM_FILENAME = "data/human-freedom-index-2019.csv"
 RESPONSE_FILENAME = "data/covid-stringency-index.csv"
 
 
-def find_shared_countries():
+def shared_countries():
     """Find all countries that are shared between the freedom and response datasets (by ISO code)."""
 
     # The countries (by ISO code) that are in the two datasets.
@@ -35,13 +35,15 @@ def find_shared_countries():
     freedom_countries = set(freedom_countries)
     response_countries = set(response_countries)
 
-    return sorted(freedom_countries & response_countries)
+    shared_countries = sorted(freedom_countries & response_countries)
+
+    return shared_countries
 
 
-def cluster_countries():
-    """Cluster the countries based on freedom of expression data."""
+def freedom_data():
+    """Find the freedom of expression data for the countries"""
 
-    countries = find_shared_countries()
+    countries = shared_countries()
 
     # The columns in the freedom of expression dataset that will be used.
     freedom_columns = [
@@ -72,3 +74,5 @@ def cluster_countries():
                 # Skip the country if any of the values were blank or otherwise could not be converted to a number.
                 except ValueError:
                     continue
+
+    return freedom_data
