@@ -6,7 +6,13 @@ RESPONSE_FILENAME = "data/covid-stringency-index.csv"
 
 
 def shared_countries():
-    """Find all countries that are shared between the freedom and response datasets (by ISO code)."""
+    """
+    Find all countries that are shared between the freedom and response datasets (by ISO code).
+
+    Returns a list in the following format:
+
+    [COUNTRY_ISO_CODE, ...]
+    """
 
     # The countries (by ISO code) that are in the two datasets.
     freedom_countries = []
@@ -41,7 +47,16 @@ def shared_countries():
 
 
 def freedom_data():
-    """Find the freedom of expression data for the countries"""
+    """
+    Find the freedom of expression data for the countries.
+
+    Returns a dictionary in the following format:
+
+    {
+        COUNTRY_NAME: LIST_OF_VALUES,
+        ...
+    }
+    """
 
     countries = shared_countries()
 
@@ -76,3 +91,7 @@ def freedom_data():
                     continue
 
     return freedom_data
+
+
+def country_clusters():
+    """Cluster the countries based on their freedom of expression values."""
