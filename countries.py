@@ -15,11 +15,9 @@ def find_shared_countries():
     response_countries = []
 
     with open(FREEDOM_FILENAME) as freedom_file:
-
         freedom_reader = csv.DictReader(freedom_file)
 
         for row in freedom_reader:
-
             # Only use the rows from 2017 (see README).
             if row["year"] == "2017":
                 country = row["ISO_code"]
@@ -28,7 +26,6 @@ def find_shared_countries():
                     freedom_countries.append(country)
 
     with open(RESPONSE_FILENAME) as response_file:
-
         response_reader = csv.DictReader(response_file)
 
         for row in response_reader:
@@ -62,14 +59,11 @@ def cluster_countries():
     freedom_data = {}
 
     with open(FREEDOM_FILENAME) as freedom_file:
-
         freedom_reader = csv.DictReader(freedom_file)
 
         for row in freedom_reader:
-
             # Check if the row has the right year and country values
             if row["year"] == "2017" and row["ISO_code"] in countries:
-
                 country = row["ISO_code"]
 
                 try:
