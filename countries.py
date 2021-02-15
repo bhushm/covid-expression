@@ -53,7 +53,7 @@ def freedom_data():
     Returns a dictionary in the following format:
 
     {
-        COUNTRY_NAME: LIST_OF_VALUES,
+        COUNTRY_ISO_CODE: LIST_OF_VALUES,
         ...
     }
     """
