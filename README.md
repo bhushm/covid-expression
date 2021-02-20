@@ -27,3 +27,18 @@ This project focuses on how freedom of the expression in a particular country co
 
 ## Methods
 
+```
+from sklearn.cluster import KMeans
+myKmeans = KMeans(n_clusters=4, n_init =15, max_iter =300, tol=0.0001)
+myKmeans.fit(Freedom of the Press Data)
+myKmeans.labels_
+from sklearn.linear_model import LinearRegression
+myLinReg = LinearRegression()
+myLinReg.fit(Freedom of the Press.reshape(-1, 1), Response)
+myLinReg.coef_, myLinReg.intercept_
+plt.plot(Freedom of the Press Data. myLinReg.coef_ * Freedom of the Press Data + myLinReg.intercept_)
+```
+
+Take average COVID stringency for each class, print pf_expression score with it so I know which class represents which.
+
+https://realpython.com/k-means-clustering-python/
