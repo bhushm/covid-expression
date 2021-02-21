@@ -1,4 +1,6 @@
 import csv
+import datetime
+
 from pandas import DataFrame
 from sklearn.cluster import KMeans
 
@@ -186,7 +188,7 @@ def freedom_averages():
     return averages
 
 
-def response_averages():
+def final_response_averages():
     """
     Find the average COVID response for each cluster at the end of 2020.
 
@@ -211,11 +213,10 @@ def response_averages():
                 country = row["Code"]
                 date = row["Date"]
 
-                if country in cluster and date == "2020-12-31":
+                if (country in cluster) and (date == "2020-12-31"):
                     response_values.append(float(row["stringency_index"]))
 
-        response_average = round(sum(response_values) / len(response_values), 4)
-        averages.append(response_average)
+        averages.append(round(sum(response_values) / len(response_values), 4))
 
     return averages
 
@@ -230,17 +231,62 @@ def seasonal_response_averages():
         [
             SPRING_RESPONSE_AVERAGE,
             SUMMER_RESPONSE_AVERAGE,
-            WINTER_RESPONSE_AVERAGE,
+            FALL_RESPONSE_AVERAGE,
         ],
         ...
     ]
     """
+
+    clusters = country_clusters()
+    seasonal_averages = []
+
+    # The dates being used across the project for seasons
+    SPRING_START = datetime.date(2020, 4, 1)
+    SUMMER_START = datetime.date(2020, 6, 1)
+    FALL_START = datetime.date(2020, 9, 1)
+    END = datetime.date(2020, 12, 1)
+
+    for cluster in clusters:
+        spring_response_values = []
+        summer_response_values = []
+        fall_response_values = []
+
+        with open(RESPONSE_FILENAME) as response_file:
+            response_reader = csv.DictReader(response_file)
+
+            for row in response_reader:
+                country = row["Code"]
+                date = row["Date"]
+
+                if country in cluster:
+                    # Convert the date to a datetime object for comparison
+                    date = datetime.datetime.strptime(date, "%Y-%m-%d").date()
+
+                    if SPRING_START <= date < SUMMER_START:
+                        spring_response_values.append(float(row["stringency_index"]))
+
+                    if SUMMER_START <= date < FALL_START:
+                        summer_response_values.append(float(row["stringency_index"]))
+
+                    if FALL_START <= date < END:
+                        fall_response_values.append(float(row["stringency_index"]))
+
+        seasonal_averages.append(
+            [
+                round(sum(spring_response_values) / len(spring_response_values), 4),
+                round(sum(summer_response_values) / len(summer_response_values), 4),
+                round(sum(fall_response_values) / len(fall_response_values), 4),
+            ]
+        )
+
+    return seasonal_averages
 
 
 # Print results for testing
 print(
     country_clusters(),
     freedom_averages(),
-    response_averages(),
+    final_response_averages(),
+    seasonal_response_averages(),
     sep="\n",
 )
