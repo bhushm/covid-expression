@@ -220,6 +220,7 @@ def response_averages():
     return averages
 
 
+# Print results for testing
 print(
     country_clusters(),
     freedom_averages(),
