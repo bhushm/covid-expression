@@ -193,7 +193,7 @@ def response_averages():
     Returns a list in the following format:
 
     [
-        RESPONSE_FINAL_AVERAGE,
+        FINAL_RESPONSE_AVERAGE,
         ...
     ]
     """
@@ -220,10 +220,27 @@ def response_averages():
     return averages
 
 
+def season_response_averages():
+    """
+    Find the average COVID response for each cluster for each season of 2020.
+
+    Returns a list in the following format (each sublist is for a single cluster):
+
+    [
+        [
+            SPRING_RESPONSE_AVERAGE,
+            SUMMER_RESPONSE_AVERAGE,
+            WINTER_RESPONSE_AVERAGE,
+        ],
+        ...
+    ]
+    """
+
+
 # Print results for testing
 print(
     country_clusters(),
     freedom_averages(),
     response_averages(),
-    sep="\n\n",
+    sep="\n",
 )
