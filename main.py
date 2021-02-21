@@ -220,7 +220,7 @@ def response_averages():
     return averages
 
 
-def season_response_averages():
+def seasonal_response_averages():
     """
     Find the average COVID response for each cluster for each season of 2020.
 
