@@ -18,11 +18,12 @@ This project focuses on how freedom of the expression in a particular country co
 
 ## Development
 
-- Create the virtual environment and install the required packages (python 3.6+).
+- Create the virtual environment, install the required packages (python 3.6+), and run the main script.
     ```
     python -m venv venv
     venv\Scripts\activate
     python -m pip install -r requirements.txt
+    python main.py
     ```
 
 ## Methods

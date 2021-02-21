@@ -1,5 +1,6 @@
 # Project
 venv/
+__pycache__/
 
 # Editor
 .vscode/
