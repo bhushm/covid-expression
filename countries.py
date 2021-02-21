@@ -55,7 +55,10 @@ def freedom_data():
     Returns a dictionary in the following format:
 
     {
-        COUNTRY_ISO_CODE: LIST_OF_VALUES,
+        COUNTRY_ISO_CODE: {
+            FREEDOM_PARAMETER: FREEDOM_VALUE,
+            ...
+        },
         ...
     }
     """
@@ -101,12 +104,23 @@ def freedom_data():
 
 
 def country_clusters():
-    """Cluster the countries based on their freedom of expression values."""
+    """
+    Cluster the countries based on their freedom of expression values.
+
+    Returns a list in the following format, where each sublist is a list of countries in a single cluster:
+
+    [
+        [
+            COUNTRY_ISO_CODE,
+            ...
+        ],
+        ...
+    ]
+    """
 
     data = freedom_data()
 
     # Load the freedom data as a DataFrame, with each row being a single country.
-    keys = list(data.keys())
     data_array = DataFrame.from_dict(data, orient="index")
 
     kmeans = KMeans(
@@ -120,13 +134,16 @@ def country_clusters():
     kmeans.fit(data_array)
 
     labels = kmeans.labels_
+    countries = list(data.keys())
 
-    clusters = {}
+    # Initialize the list to hold the clusters, with one sublist for each cluster label
+    clusters = []
     for label in sorted(set(labels)):
-        clusters[label] = []
+        clusters.append([])
 
-    for i in range(len(keys)):
-        country = keys[i]
+    # Add the countries one-by-one to the correct sublist
+    for i in range(len(countries)):
+        country = countries[i]
         label = labels[i]
 
         clusters[label].append(country)
@@ -134,17 +151,23 @@ def country_clusters():
     return clusters
 
 
-def response_averages():
-    """Find the COVID response averages for each cluster of countries."""
+def freedom_averages():
+    """
+    Find the freedom of expression superscore for each cluster.
+
+    Returns a list in the following format:
+
+    [
+        FREEDOM_SUPERSCORE_AVERAGE,
+        ...
+    ]
+    """
 
     clusters = country_clusters()
+    averages = []
 
-    for cluster_number in clusters:
-        cluster = clusters[cluster_number]
-
-        # The countries (by ISO code) that are in the two datasets.
+    for cluster in clusters:
         freedom_values = []
-        response_values = []
 
         with open(FREEDOM_FILENAME) as freedom_file:
             freedom_reader = csv.DictReader(freedom_file)
@@ -157,6 +180,30 @@ def response_averages():
                     if country in cluster:
                         freedom_values.append(float(row["pf_expression"]))
 
+        freedom_average = round(sum(freedom_values) / len(freedom_values), 4)
+        averages.append(freedom_average)
+
+    return averages
+
+
+def response_averages():
+    """
+    Find the average COVID response for each cluster at the end of 2020.
+
+    Returns a list in the following format:
+
+    [
+        RESPONSE_FINAL_AVERAGE,
+        ...
+    ]
+    """
+
+    clusters = country_clusters()
+    averages = []
+
+    for cluster in clusters:
+        response_values = []
+
         with open(RESPONSE_FILENAME) as response_file:
             response_reader = csv.DictReader(response_file)
 
@@ -167,13 +214,15 @@ def response_averages():
                 if country in cluster and date == "2020-12-31":
                     response_values.append(float(row["stringency_index"]))
 
-        print(
-            cluster_number,
-            "average expression score:",
-            round(sum(freedom_values) / len(freedom_values), 4),
-            "average response score:",
-            round(sum(response_values) / len(response_values), 4),
-        )
+        response_average = round(sum(response_values) / len(response_values), 4)
+        averages.append(response_average)
+
+    return averages
 
 
-response_averages()
+print(
+    country_clusters(),
+    freedom_averages(),
+    response_averages(),
+    sep="\n\n",
+)
