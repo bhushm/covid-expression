@@ -5,9 +5,11 @@ from . import FREEDOM_FILENAME, RESPONSE_FILENAME
 from .clusters import country_clusters
 
 
-def freedom_averages():
+def freedom_averages(clusters):
     """
     Find the freedom of expression superscore for each cluster.
+
+    Accepts a list of lists, with each sublist containing a list of country ISO codes (see country_clusters()).
 
     Returns a list in the following format:
 
@@ -17,7 +19,6 @@ def freedom_averages():
     ]
     """
 
-    clusters = country_clusters()
     averages = []
 
     for cluster in clusters:
@@ -40,9 +41,11 @@ def freedom_averages():
     return averages
 
 
-def final_response_averages():
+def final_response_averages(clusters):
     """
     Find the average COVID response for each cluster at the end of 2020.
+
+    Accepts a list of lists, with each sublist containing a list of country ISO codes (see country_clusters()).
 
     Returns a list in the following format:
 
@@ -52,7 +55,6 @@ def final_response_averages():
     ]
     """
 
-    clusters = country_clusters()
     averages = []
 
     for cluster in clusters:
@@ -73,9 +75,11 @@ def final_response_averages():
     return averages
 
 
-def seasonal_response_averages():
+def seasonal_response_averages(clusters):
     """
     Find the average COVID response for each cluster for each season of 2020.
+
+    Accepts a list of lists, with each sublist containing a list of country ISO codes (see country_clusters()).
 
     Returns a list in the following format (each sublist is for a single cluster):
 
@@ -89,7 +93,6 @@ def seasonal_response_averages():
     ]
     """
 
-    clusters = country_clusters()
     seasonal_averages = []
 
     # The dates being used across the project for seasons

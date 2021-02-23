@@ -3,12 +3,13 @@ from pandas import DataFrame
 from sklearn.cluster import KMeans
 
 from . import FREEDOM_FILENAME, RESPONSE_FILENAME
-from .countries import shared_countries
 
 
-def freedom_data():
+def freedom_data(countries):
     """
     Find the freedom of expression data for the countries.
+
+    Accepts a list of country ISO codes (see shared_countries()).
 
     Returns a dictionary in the following format:
 
@@ -20,8 +21,6 @@ def freedom_data():
         ...
     }
     """
-
-    countries = shared_countries()
 
     # The columns in the freedom of expression dataset that will be used.
     freedom_columns = [
@@ -61,9 +60,11 @@ def freedom_data():
     return freedom_data
 
 
-def country_clusters():
+def country_clusters(freedom_data):
     """
     Cluster the countries based on their freedom of expression values.
+
+    Accepts a dictionary of freedom data by country (see freedom_data()).
 
     Returns a list in the following format, where each sublist is a list of countries in a single cluster:
 
@@ -76,10 +77,8 @@ def country_clusters():
     ]
     """
 
-    data = freedom_data()
-
     # Load the freedom data as a DataFrame, with each row being a single country.
-    data_array = DataFrame.from_dict(data, orient="index")
+    data_array = DataFrame.from_dict(freedom_data, orient="index")
 
     kmeans = KMeans(
         n_clusters=4,
@@ -92,7 +91,7 @@ def country_clusters():
     kmeans.fit(data_array)
 
     labels = kmeans.labels_
-    countries = list(data.keys())
+    countries = list(freedom_data.keys())
 
     # Initialize the list to hold the clusters, with one sublist for each cluster label
     clusters = []
