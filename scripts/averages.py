@@ -2,7 +2,6 @@ import csv
 import datetime
 
 from . import FREEDOM_FILENAME, RESPONSE_FILENAME
-from .clusters import country_clusters
 
 
 def freedom_averages(clusters):
