@@ -98,12 +98,14 @@ def seasonal_response_averages(clusters):
     SPRING_START = datetime.date(2020, 4, 1)
     SUMMER_START = datetime.date(2020, 6, 1)
     FALL_START = datetime.date(2020, 9, 1)
-    END = datetime.date(2020, 12, 1)
+    WINTER_START = datetime.date(2020, 12, 1)
+    END = datetime.date(2021, 2, 1)
 
     for cluster in clusters:
         spring_response_values = []
         summer_response_values = []
         fall_response_values = []
+        winter_response_values = []
 
         with open(RESPONSE_FILENAME) as response_file:
             response_reader = csv.DictReader(response_file)
@@ -122,14 +124,18 @@ def seasonal_response_averages(clusters):
                     if SUMMER_START <= date < FALL_START:
                         summer_response_values.append(float(row["stringency_index"]))
 
-                    if FALL_START <= date < END:
+                    if FALL_START <= date < WINTER_START:
                         fall_response_values.append(float(row["stringency_index"]))
+
+                    if WINTER_START <= date < END:
+                        winter_response_values.append(float(row["stringency_index"]))
 
         seasonal_averages.append(
             [
                 round(sum(spring_response_values) / len(spring_response_values), 4),
                 round(sum(summer_response_values) / len(summer_response_values), 4),
                 round(sum(fall_response_values) / len(fall_response_values), 4),
+                round(sum(winter_response_values) / len(winter_response_values), 4),
             ]
         )
 
