@@ -33,7 +33,7 @@ def shared_countries():
         for row in response_reader:
             country = row["Code"]
 
-            if not country in response_countries:
+            if country not in response_countries:
                 response_countries.append(country)
 
     freedom_countries = set(freedom_countries)
