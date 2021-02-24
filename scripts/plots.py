@@ -61,7 +61,7 @@ def final_response_plot(clusters):
 
     plt.suptitle("COVID Response Stringency vs. Freedom of Expression (12/31/2020)")
     plt.title(
-        "Linear Regression: y = " + str(round(m, 2)) + "x + " + str(round(b, 2)), pad=10
+        "Regression Line: y = " + str(round(m, 2)) + "x + " + str(round(b, 2)), pad=10
     )
 
     plt.xlabel("Freedom of Expression Index")
@@ -69,6 +69,6 @@ def final_response_plot(clusters):
 
     path = "results/images/final.png"
 
-    plt.savefig(path, dpi=150)
+    plt.savefig(path, dpi=200)
 
     return path
