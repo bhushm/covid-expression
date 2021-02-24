@@ -1,18 +1,11 @@
 import csv
 import datetime
-from matplotlib import pyplot as plt
+
 import numpy as np
+from matplotlib import pyplot as plt
 from sklearn.linear_model import LinearRegression
 
-from . import (
-    FREEDOM_FILENAME,
-    RESPONSE_FILENAME,
-    SPRING_START,
-    SUMMER_START,
-    FALL_START,
-    WINTER_START,
-    END,
-)
+from . import FREEDOM_FILENAME, RESPONSE_FILENAME
 
 
 def final_response_plot(clusters):
@@ -67,7 +60,9 @@ def final_response_plot(clusters):
     plt.axis([0, 10, 0, 100])
 
     plt.suptitle("COVID Response Stringency vs. Freedom of Expression (12/31/2020)")
-    plt.title("Linear Regression: y = " + str(round(m, 2)) + "x + " + str(round(b, 2)), pad=10)
+    plt.title(
+        "Linear Regression: y = " + str(round(m, 2)) + "x + " + str(round(b, 2)), pad=10
+    )
 
     plt.xlabel("Freedom of Expression Index")
     plt.ylabel("COVID Response Stringency Index")
