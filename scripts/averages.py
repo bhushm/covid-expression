@@ -1,7 +1,15 @@
 import csv
 import datetime
 
-from . import FREEDOM_FILENAME, RESPONSE_FILENAME
+from . import (
+    FREEDOM_FILENAME,
+    RESPONSE_FILENAME,
+    SPRING_START,
+    SUMMER_START,
+    FALL_START,
+    WINTER_START,
+    END,
+)
 
 
 def freedom_averages(clusters):
@@ -93,13 +101,6 @@ def seasonal_response_averages(clusters):
     """
 
     seasonal_averages = []
-
-    # The dates being used across the project for seasons
-    SPRING_START = datetime.date(2020, 4, 1)
-    SUMMER_START = datetime.date(2020, 6, 1)
-    FALL_START = datetime.date(2020, 9, 1)
-    WINTER_START = datetime.date(2020, 12, 1)
-    END = datetime.date(2021, 2, 1)
 
     for cluster in clusters:
         spring_response_values = []
