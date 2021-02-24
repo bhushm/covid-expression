@@ -15,6 +15,10 @@ from scripts.averages import (
     seasonal_response_averages,
 )
 
+from scripts.plots import (
+    final_response_plot
+)
+
 
 countries = shared_countries()
 
@@ -25,5 +29,6 @@ print(
     freedom_averages(clusters),
     final_response_averages(clusters),
     seasonal_response_averages(clusters),
+    final_response_plot(clusters),
     sep="\n",
 )
