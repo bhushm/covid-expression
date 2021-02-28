@@ -95,6 +95,7 @@ def seasonal_response_averages(clusters):
             SPRING_RESPONSE_AVERAGE,
             SUMMER_RESPONSE_AVERAGE,
             FALL_RESPONSE_AVERAGE,
+            WINTER_RESPONSE_AVERAGE,
         ],
         ...
     ]
